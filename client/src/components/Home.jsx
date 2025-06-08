@@ -72,21 +72,20 @@ export default function Home() {
         alert("Invalid JSON data");
         setLoading(false);
         return;
-      }      // Request to our proxy server
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+      } // Request to our proxy server
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || "";
       // Remove trailing slash if present to prevent double slashes
-      const baseUrl = backendUrl.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl;
-      
-      const serverResponse = await axios.post(
-        `${baseUrl}/api/proxy`,
-        {
-          method,
-          url,
-          headers: keyValuePairsToObject(headers),
-          params: keyValuePairsToObject(queryParams),
-          data,
-        }
-      );
+      const baseUrl = backendUrl.endsWith("/")
+        ? backendUrl.slice(0, -1)
+        : backendUrl;
+
+      const serverResponse = await axios.post(`${baseUrl}/api/proxy`, {
+        method,
+        url,
+        headers: keyValuePairsToObject(headers),
+        params: keyValuePairsToObject(queryParams),
+        data,
+      });
 
       setResponse(serverResponse.data);
     } catch (error) {
