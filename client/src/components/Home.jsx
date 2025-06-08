@@ -72,11 +72,13 @@ export default function Home() {
         alert("Invalid JSON data");
         setLoading(false);
         return;
-      }
-
-      // Request to our proxy server
+      }      // Request to our proxy server
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '';
+      // Remove trailing slash if present to prevent double slashes
+      const baseUrl = backendUrl.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl;
+      
       const serverResponse = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/proxy`,
+        `${baseUrl}/api/proxy`,
         {
           method,
           url,
