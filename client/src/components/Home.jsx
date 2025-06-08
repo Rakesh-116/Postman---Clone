@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import KeyValuePair from "../KeyValuePair";
-import JsonEditor from "../JsonEditor";
-import ResponseSection from "../ResponseSection";
+import KeyValuePair from "./KeyValuePair";
+import JsonEditor from "./JsonEditor";
+import ResponseSection from "./ResponseSection";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -76,7 +76,7 @@ export default function Home() {
 
       // Request to our proxy server
       const serverResponse = await axios.post(
-        "http://localhost:5000/api/proxy",
+        `${import.meta.env.VITE_BACKEND_URL}/api/proxy`,
         {
           method,
           url,
